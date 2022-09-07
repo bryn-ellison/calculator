@@ -1,3 +1,50 @@
+const calculatorBody = document.querySelector("#calculator-body");
+const screen = document.querySelector("#screen");
+const keypad = document.querySelector("#keypad");
+
+// build keypad and buttons
+
+for (i = 0; i < 10; i++) {
+  const numButton = document.createElement("button");
+  numButton.textContent = `${i}`;
+  numButton.id = i;
+  numButton.classList.add("number-button");
+  keypad.appendChild(numButton);
+}
+
+const addButton = document.createElement("button");
+addButton.textContent = "+";
+addButton.id = "add-button";
+addButton.classList.add("number-button");
+
+const subtractButton = document.createElement("button");
+subtractButton.textContent = "-";
+subtractButton.id = "subtract-button";
+subtractButton.classList.add("number-button");
+
+const multiplyButton = document.createElement("button");
+multiplyButton.textContent = "×";
+multiplyButton.id = "multiply-button";
+multiplyButton.classList.add("number-button");
+
+const divideButton = document.createElement("button");
+divideButton.textContent = "÷";
+divideButton.id = "divide-button";
+divideButton.classList.add("number-button");
+
+const clearButton = document.createElement("button");
+clearButton.textContent = "C";
+clearButton.id = "clear-button";
+clearButton.classList.add("number-button");
+
+keypad.appendChild(addButton);
+keypad.appendChild(subtractButton);
+keypad.appendChild(multiplyButton);
+keypad.appendChild(divideButton);
+keypad.appendChild(clearButton);
+
+//calculation functions
+
 function add(num1, num2) {
   return num1 + num2;
 }
