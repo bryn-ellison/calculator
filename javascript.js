@@ -2,6 +2,12 @@ const calculatorBody = document.querySelector("#calculator-body");
 const screen = document.querySelector("#screen");
 const keypad = document.querySelector("#keypad");
 
+// build screen
+
+const display = document.createElement("textarea");
+display.textContent = "012345";
+screen.appendChild(display);
+
 // build keypad and buttons
 
 for (i = 0; i < 10; i++) {
@@ -37,11 +43,16 @@ clearButton.textContent = "C";
 clearButton.id = "clear-button";
 clearButton.classList.add("number-button");
 
+const equalsButton = document.createElement("button");
+equalsButton.textContent = "=";
+equalsButton.id = "equals-button";
+
 keypad.appendChild(addButton);
 keypad.appendChild(subtractButton);
 keypad.appendChild(multiplyButton);
 keypad.appendChild(divideButton);
 keypad.appendChild(clearButton);
+keypad.appendChild(equalsButton);
 
 //calculation functions
 
