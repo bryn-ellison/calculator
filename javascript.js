@@ -1,11 +1,59 @@
 const calculatorBody = document.querySelector("#calculator-body");
 const screen = document.querySelector("#screen");
 const keypad = document.querySelector("#keypad");
+let displayValue = [];
+let firstValue = undefined;
+let secondValue = undefined;
+let operatorValue = "";
+let clearNext = false;
+
+//calculation functions
+
+function add(num1, num2) {
+  return parseInt(num1) + parseInt(num2);
+}
+
+function subtract(num1, num2) {
+  return num1 - num2;
+}
+
+function multiply(num1, num2) {
+  return num1 * num2;
+}
+
+function divide(num1, num2) {
+  return num1 / num2;
+}
+
+function operate(operator, num1, num2) {
+  if (num2 === undefined) {
+    return num1;
+  }
+  if (operator === "+") {
+    return add(num1, num2);
+  } else if (operator === "-") {
+    return subtract(num1, num2);
+  } else if (operator === "*") {
+    return multiply(num1, num2);
+  } else if (operator === "/") {
+    return divide(num1, num2);
+  }
+}
+
+function populateDisplay(num) {
+  displayValue += num;
+  display.textContent = displayValue;
+}
+
+function clearDisplay() {
+  displayValue = [];
+  display.textContent = [];
+}
 
 // build screen
 
 const display = document.createElement("textarea");
-display.textContent = "012345";
+display.textContent = displayValue;
 screen.appendChild(display);
 
 // build keypad and buttons
@@ -15,6 +63,13 @@ for (i = 0; i < 10; i++) {
   numButton.textContent = `${i}`;
   numButton.id = i;
   numButton.classList.add("number-button");
+  numButton.addEventListener("click", () => {
+    if (clearNext === true) {
+      clearDisplay();
+      clearNext = false;
+    }
+    populateDisplay(numButton.id);
+  });
   keypad.appendChild(numButton);
 }
 
@@ -22,6 +77,25 @@ const addButton = document.createElement("button");
 addButton.textContent = "+";
 addButton.id = "add-button";
 addButton.classList.add("number-button");
+addButton.addEventListener("click", () => {
+  if (clearNext === true) {
+    return;
+  }
+  if (firstValue === undefined) {
+    firstValue = displayValue;
+    operatorValue = "+";
+    clearDisplay();
+  } else {
+    operatorValue = "+";
+    secondValue = displayValue;
+    clearDisplay();
+    console.log("fires");
+    displayValue = operate("+", firstValue, secondValue);
+    firstValue = displayValue;
+    display.textContent = displayValue;
+    clearNext = true;
+  }
+});
 
 const subtractButton = document.createElement("button");
 subtractButton.textContent = "-";
@@ -53,35 +127,3 @@ keypad.appendChild(multiplyButton);
 keypad.appendChild(divideButton);
 keypad.appendChild(clearButton);
 keypad.appendChild(equalsButton);
-
-//calculation functions
-
-function add(num1, num2) {
-  return num1 + num2;
-}
-
-function subtract(num1, num2) {
-  return num1 - num2;
-}
-
-function multiply(num1, num2) {
-  return num1 * num2;
-}
-
-function divide(num1, num2) {
-  return num1 / num2;
-}
-
-function operate(operator, num1, num2) {
-  if (operator === "+") {
-    return add(num1, num2);
-  } else if (operator === "-") {
-    return subtract(num1, num2);
-  } else if (operator === "*") {
-    return multiply(num1, num2);
-  } else if (operator === "/") {
-    return divide(num1, num2);
-  }
-}
-
-console.log(operate("/", 5, 10));
