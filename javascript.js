@@ -6,6 +6,7 @@ let firstValue = undefined;
 let secondValue = undefined;
 let operatorValue = "";
 let clearNext = false;
+let stopEquals = false;
 
 //calculation functions
 
@@ -14,15 +15,15 @@ function add(num1, num2) {
 }
 
 function subtract(num1, num2) {
-  return num1 - num2;
+  return parseInt(num1) - parseInt(num2);
 }
 
 function multiply(num1, num2) {
-  return num1 * num2;
+  return parseInt(num1) * parseInt(num2);
 }
 
 function divide(num1, num2) {
-  return num1 / num2;
+  return parseInt(num1) / parseInt(num2);
 }
 
 function operate(operator, num1, num2) {
@@ -68,6 +69,13 @@ for (i = 0; i < 10; i++) {
       clearDisplay();
       clearNext = false;
     }
+    if (stopEquals === true) {
+      clearDisplay();
+      stopEquals = false;
+      firstValue = undefined;
+      secondValue = undefined;
+      operatorValue = "";
+    }
     populateDisplay(numButton.id);
   });
   keypad.appendChild(numButton);
@@ -81,19 +89,26 @@ addButton.addEventListener("click", () => {
   if (clearNext === true) {
     return;
   }
-  if (firstValue === undefined) {
+  if (stopEquals === true) {
     firstValue = displayValue;
     operatorValue = "+";
+    clearNext = true;
+    stopEquals = false;
+    console.log("stop equals fires");
+  } else if (firstValue === undefined) {
+    firstValue = displayValue;
+    operatorValue = "+";
+    stopEquals = false;
     clearDisplay();
   } else {
     operatorValue = "+";
     secondValue = displayValue;
     clearDisplay();
-    console.log("fires");
     displayValue = operate("+", firstValue, secondValue);
     firstValue = displayValue;
     display.textContent = displayValue;
     clearNext = true;
+    stopEquals = false;
   }
 });
 
@@ -120,6 +135,17 @@ clearButton.classList.add("number-button");
 const equalsButton = document.createElement("button");
 equalsButton.textContent = "=";
 equalsButton.id = "equals-button";
+equalsButton.addEventListener("click", () => {
+  if (stopEquals === true) {
+    return;
+  }
+  secondValue = displayValue;
+  clearDisplay();
+  displayValue = operate(operatorValue, firstValue, secondValue);
+  firstValue = displayValue;
+  display.textContent = displayValue;
+  stopEquals = true;
+});
 
 keypad.appendChild(addButton);
 keypad.appendChild(subtractButton);
