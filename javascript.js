@@ -111,6 +111,7 @@ const addButton = document.createElement("button");
 addButton.textContent = "+";
 addButton.id = "add-button";
 addButton.classList.add("number-button");
+addButton.classList.add("operator-button");
 addButton.addEventListener("click", () => {
   operatorClick("+");
 });
@@ -119,6 +120,7 @@ const subtractButton = document.createElement("button");
 subtractButton.textContent = "-";
 subtractButton.id = "subtract-button";
 subtractButton.classList.add("number-button");
+subtractButton.classList.add("operator-button");
 subtractButton.addEventListener("click", () => {
   operatorClick("-");
 });
@@ -127,6 +129,7 @@ const multiplyButton = document.createElement("button");
 multiplyButton.textContent = "×";
 multiplyButton.id = "multiply-button";
 multiplyButton.classList.add("number-button");
+multiplyButton.classList.add("operator-button");
 multiplyButton.addEventListener("click", () => {
   operatorClick("*");
 });
@@ -135,6 +138,7 @@ const divideButton = document.createElement("button");
 divideButton.textContent = "÷";
 divideButton.id = "divide-button";
 divideButton.classList.add("number-button");
+divideButton.classList.add("operator-button");
 divideButton.addEventListener("click", () => {
   operatorClick("/");
 });
@@ -164,6 +168,7 @@ allClearButton.addEventListener("click", () => {
 const equalsButton = document.createElement("button");
 equalsButton.textContent = "=";
 equalsButton.id = "equals-button";
+equalsButton.classList.add("number-button");
 equalsButton.addEventListener("click", () => {
   if (stopEquals === true) {
     return;
@@ -176,10 +181,10 @@ equalsButton.addEventListener("click", () => {
   stopEquals = true;
 });
 
+keypad.appendChild(allClearButton);
+keypad.appendChild(clearButton);
 keypad.appendChild(addButton);
 keypad.appendChild(subtractButton);
 keypad.appendChild(multiplyButton);
 keypad.appendChild(divideButton);
-keypad.appendChild(allClearButton);
-keypad.appendChild(clearButton);
 keypad.appendChild(equalsButton);
