@@ -143,6 +143,23 @@ const clearButton = document.createElement("button");
 clearButton.textContent = "C";
 clearButton.id = "clear-button";
 clearButton.classList.add("number-button");
+clearButton.addEventListener("click", () => {
+  clearDisplay();
+});
+
+const allClearButton = document.createElement("button");
+allClearButton.textContent = "AC";
+allClearButton.id = "clear-button";
+allClearButton.classList.add("number-button");
+allClearButton.addEventListener("click", () => {
+  clearDisplay();
+  displayValue = [];
+  firstValue = undefined;
+  secondValue = undefined;
+  operatorValue = "";
+  clearNext = false;
+  stopEquals = false;
+});
 
 const equalsButton = document.createElement("button");
 equalsButton.textContent = "=";
@@ -163,5 +180,6 @@ keypad.appendChild(addButton);
 keypad.appendChild(subtractButton);
 keypad.appendChild(multiplyButton);
 keypad.appendChild(divideButton);
+keypad.appendChild(allClearButton);
 keypad.appendChild(clearButton);
 keypad.appendChild(equalsButton);

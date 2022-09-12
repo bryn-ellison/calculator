@@ -1,0 +1,62 @@
+* {
+    margin: auto;
+}
+
+#calculator-body {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: solid;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 250px;
+    text-align: center;
+}
+
+#screen {
+    margin: auto;
+    text-align: center;
+    border: solid;
+    width: 90%;
+    margin-bottom: 1rem;
+    vertical-align: bottom;
+    border-radius: 0.5rem;
+}
+
+#screen > textarea {
+    border: none; 
+    padding: 0.5rem;
+    resize: none;
+    max-width: 100%;
+    height: 1.2rem;
+    text-align: right;
+    vertical-align: bottom;
+    font-size: 1rem;
+}
+
+#keypad {
+    margin-top: 2rem;
+    border: solid;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+
+.number-button {
+    margin: 0.1rem;
+    height: 3rem;
+    width: 3rem;
+    font-size: 1rem;
+}
+
+#equals-button {
+    margin: 0.1rem;
+    height: 3rem;
+    width: 3rem;
+    font-size: 1rem;
+}
