@@ -51,6 +51,32 @@ function clearDisplay() {
   display.textContent = [];
 }
 
+function operatorClick(operator) {
+  if (clearNext === true) {
+    return;
+  }
+  if (stopEquals === true) {
+    firstValue = displayValue;
+    operatorValue = operator;
+    clearNext = true;
+    stopEquals = false;
+  } else if (firstValue === undefined) {
+    firstValue = displayValue;
+    operatorValue = operator;
+    stopEquals = false;
+    clearDisplay();
+  } else {
+    secondValue = displayValue;
+    clearDisplay();
+    displayValue = operate(operatorValue, firstValue, secondValue);
+    operatorValue = operator;
+    firstValue = displayValue;
+    display.textContent = displayValue;
+    clearNext = true;
+    stopEquals = false;
+  }
+}
+
 // build screen
 
 const display = document.createElement("textarea");
@@ -86,46 +112,32 @@ addButton.textContent = "+";
 addButton.id = "add-button";
 addButton.classList.add("number-button");
 addButton.addEventListener("click", () => {
-  if (clearNext === true) {
-    return;
-  }
-  if (stopEquals === true) {
-    firstValue = displayValue;
-    operatorValue = "+";
-    clearNext = true;
-    stopEquals = false;
-    console.log("stop equals fires");
-  } else if (firstValue === undefined) {
-    firstValue = displayValue;
-    operatorValue = "+";
-    stopEquals = false;
-    clearDisplay();
-  } else {
-    operatorValue = "+";
-    secondValue = displayValue;
-    clearDisplay();
-    displayValue = operate("+", firstValue, secondValue);
-    firstValue = displayValue;
-    display.textContent = displayValue;
-    clearNext = true;
-    stopEquals = false;
-  }
+  operatorClick("+");
 });
 
 const subtractButton = document.createElement("button");
 subtractButton.textContent = "-";
 subtractButton.id = "subtract-button";
 subtractButton.classList.add("number-button");
+subtractButton.addEventListener("click", () => {
+  operatorClick("-");
+});
 
 const multiplyButton = document.createElement("button");
 multiplyButton.textContent = "×";
 multiplyButton.id = "multiply-button";
 multiplyButton.classList.add("number-button");
+multiplyButton.addEventListener("click", () => {
+  operatorClick("*");
+});
 
 const divideButton = document.createElement("button");
 divideButton.textContent = "÷";
 divideButton.id = "divide-button";
 divideButton.classList.add("number-button");
+divideButton.addEventListener("click", () => {
+  operatorClick("/");
+});
 
 const clearButton = document.createElement("button");
 clearButton.textContent = "C";
